@@ -39,7 +39,7 @@ export default {
     },
 
     mounted() {
-        axios.get('http://localhost:8000/api/gmdate').then(response => {
+        axios.get(window.api_url+'/api/gmdate').then(response => {
             this.$store.commit('gmt/SET_GMT', moment(response.data.gmdate));
             let self = this;
             function intervalFunction() {

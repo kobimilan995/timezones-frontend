@@ -16,7 +16,7 @@ console.log(process.env.NODE_ENV);
 if(process.env.NODE_ENV == 'development') {
     window.api_url = "http://localhost:8000";
 } else {
-    window.api_url = "https://git.heroku.com/gentle-atoll-38274.git";
+    window.api_url = "https://gentle-atoll-38274.herokuapp.com";
 }
 
 console.log(window.api_url);

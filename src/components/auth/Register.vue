@@ -45,7 +45,7 @@ export default {
 
     methods: {
         submitRegisterRequest() {
-            axios.post('http://localhost:8000/api/register', this.user).then(response => {
+            axios.post(window.api_url+'/api/register', this.user).then(response => {
                 let {data} = response;
                 this.$notify({
                     group: 'notify',

@@ -5,7 +5,7 @@
 <script>
     export default {
         created() {
-            axios.get('http://localhost:8000/api/admin/test').then(response => {
+            axios.get(window.api_url+'/api/admin/test').then(response => {
                 console.log(response);
             }).catch(error => {
                 console.log(error);

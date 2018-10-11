@@ -50,7 +50,7 @@ export default {
 
     methods: {
         logout() {
-            axios.delete('http://localhost:8000/api/logout').then(response => {
+            axios.delete(window.api_url+'/api/logout').then(response => {
                 this.$notify({
                     group: 'notify',
                     title: 'Success',

@@ -28,7 +28,7 @@ export default {
 
     methods: {
         submitLoginRequest() {
-            axios.post('http://localhost:8000/api/login', this.credentials).then(response => {
+            axios.post(window.api_url+'/api/login', this.credentials).then(response => {
                 let token = response.headers.authorization;
                 // console.log(token);
                 let user = response.data.user;
