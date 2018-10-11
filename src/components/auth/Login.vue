@@ -30,7 +30,7 @@ export default {
         submitLoginRequest() {
             axios.post(window.api_url+'/api/login', this.credentials).then(response => {
                 let token = response.headers.authorization;
-                // console.log(token);
+                console.log(response);
                 let user = response.data.user;
                 localStorage.setItem('auth-token', token);
                 localStorage.setItem('auth-user', JSON.stringify(user));
