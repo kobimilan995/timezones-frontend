@@ -20,7 +20,7 @@
                     <h5 class="mr-4">{{authUser.first_name}} {{authUser.last_name}} - ({{authUser.role_name}})</h5>
                 </li>
                 <li class="nav-item" v-if="authUser.role_name == 'Admin'">
-                    <router-link to="/admin" class="nav-link">Admin dashboard</router-link>
+                    <router-link :to="{name: 'admin_dashboard'}" class="nav-link">Admin dashboard</router-link>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" @click.prevent="logout">Logout</a>

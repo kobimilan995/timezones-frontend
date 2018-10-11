@@ -5,21 +5,31 @@ import Vuex from 'vuex'
 import axios from 'axios'
 import moment from 'moment'
 import Notifications from 'vue-notification'
+import VuejsDialog from 'vuejs-dialog';
 window.moment = moment;
+
+//styles
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'vuejs-dialog/dist/vuejs-dialog.min.css';
+
+
+//vue uses
 Vue.use(VueRouter);
 Vue.use(Vuex);
 Vue.use(Notifications);
+
+
 Vue.config.productionTip = false
 
-console.log(process.env.NODE_ENV);
+
+//set api url based on production/development environment
 if(process.env.NODE_ENV == 'development') {
     window.api_url = "http://localhost:8000";
 } else {
     window.api_url = "https://gentle-atoll-38274.herokuapp.com";
 }
 
-console.log(window.api_url);
+
 /*
 ROUTER
 */
@@ -30,6 +40,8 @@ const router = new VueRouter({
 })
 
 
+
+//redirects if not authenticated
 router.beforeEach((to, from, next) => {
     if(to.matched.some(record => record.meta.requiresAuth)) {
         if (localStorage.getItem('auth-token') == null) {
