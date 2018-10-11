@@ -12,7 +12,14 @@ Vue.use(Vuex);
 Vue.use(Notifications);
 Vue.config.productionTip = false
 
+console.log(process.env.NODE_ENV);
+if(process.env.NODE_ENV == 'development') {
+    window.api_url = "http://localhost:8000";
+} else {
+    window.api_url = "https://git.heroku.com/gentle-atoll-38274.git";
+}
 
+console.log(window.api_url);
 /*
 ROUTER
 */
