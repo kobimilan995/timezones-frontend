@@ -18,7 +18,9 @@ export default {
     },
 
     created() {
-        axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.$store.state.auth.token;
+        if(this.$store.state.auth.token) {
+            axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.$store.state.auth.token;
+        }
 
         axios.interceptors.response.use((response) => {
             return response;
