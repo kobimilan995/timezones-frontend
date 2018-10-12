@@ -78,6 +78,7 @@ export default {
             localStorage.removeItem('auth-user');
             this.$store.commit('auth/SET_TOKEN', '');
             this.$store.commit('auth/SET_USER', {});
+            axios.defaults.headers.common['Authorization'] = 'Bearer ';
             this.$router.push({name: 'login'});
         }
     }
