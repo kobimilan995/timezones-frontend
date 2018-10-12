@@ -50,24 +50,26 @@ export default {
 
     methods: {
         logout() {
-            axios.delete(window.api_url+'/api/logout').then(response => {
-                this.$notify({
-                    group: 'notify',
-                    title: 'Success',
-                    text: response.data.message,
-                    type: 'success'
-                });
-                this.removeToken();
-            }).catch(error => {
-                let {data} = error.response.data;
-                this.$notify({
-                    group: 'notify',
-                    title: 'Success',
-                    text: data[Object.keys(data)[0]][0],
-                    type: 'success'
-                });
-                this.removeToken();
+            this.removeToken();
+            this.$notify({
+                group: 'notify',
+                title: 'Success',
+                text: 'Sucesfully logged out!',
+                type: 'success'
             });
+            // axios.delete(window.api_url+'/api/logout').then(response => {
+            //
+            //
+            // }).catch(error => {
+            //     let {data} = error.response.data;
+            //     this.$notify({
+            //         group: 'notify',
+            //         title: 'Success',
+            //         text: data[Object.keys(data)[0]][0],
+            //         type: 'success'
+            //     });
+            //     this.removeToken();
+            // });
 
         },
 

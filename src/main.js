@@ -17,6 +17,7 @@ import 'vuejs-dialog/dist/vuejs-dialog.min.css';
 Vue.use(VueRouter);
 Vue.use(Vuex);
 Vue.use(Notifications);
+Vue.use(VuejsDialog);
 
 
 Vue.config.productionTip = false

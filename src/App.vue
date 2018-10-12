@@ -21,8 +21,9 @@ export default {
     created() {
         if(this.$store.state.auth.token) {
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.$store.state.auth.token;
+        } else {
+            axios.defaults.headers.common['Authorization'] = 'Bearer ';
         }
-
         axios.interceptors.response.use((response) => {
             return response;
         }, (error) => {
@@ -31,6 +32,7 @@ export default {
                 localStorage.removeItem('auth-user');
                 this.$store.commit('auth/SET_TOKEN', '');
                 this.$store.commit('auth/SET_USER', {});
+                axios.defaults.headers.common['Authorization'] = 'Bearer ';
                 this.$router.push({name: 'login'});
             } else if(error.response.status == 403){
 
