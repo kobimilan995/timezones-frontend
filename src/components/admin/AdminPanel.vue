@@ -5,7 +5,7 @@
                 <router-link class="nav-link" :class="{'active': route=='admin_dashboard'}" :to="{ name: 'admin_dashboard'}">Dashboard</router-link>
             </li>
             <li class="nav-item">
-                <router-link class="nav-link" :class="{'active': route=='admin_users'}" :to="{ name: 'admin_users'}">Users</router-link>
+                <router-link class="nav-link" :class="{'active': route=='admin_users' || route == 'edit_user'}" :to="{ name: 'admin_users'}">Users</router-link>
             </li>
             <li class="nav-item">
                 <router-link class="nav-link" :class="{'active': route=='admin_time_zones'}" :to="{ name: 'admin_time_zones'}">Time Zones</router-link>
@@ -20,7 +20,7 @@
 <script>
 export default {
     created() {
-        
+
 
     },
 

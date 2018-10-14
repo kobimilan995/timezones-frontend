@@ -37,6 +37,8 @@ export default {
             } else if(error.response.status == 403){
 
                 this.$router.push({name: 'home'});
+            } else if(error.response.status == 404) {
+                this.$router.push({name: 'not_found'});
             }
 
             return Promise.reject(error);

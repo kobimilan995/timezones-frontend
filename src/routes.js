@@ -5,8 +5,15 @@ import AdminPanel from './components/admin/AdminPanel.vue';
 import Users from './components/admin/Users.vue';
 import Dashboard from './components/admin/Dashboard.vue';
 import TimeZones from './components/admin/TimeZones.vue';
+import EditUser from './components/admin/EditUser.vue';
+import NotFound from './components/NotFound.vue';
 
 const routes = [
+    {
+        path: '/resource/not_found',
+        component: NotFound,
+        name: 'not_found'
+    },
     {
         path: '/',
         component: Home,
@@ -53,6 +60,11 @@ const routes = [
                 path: 'time_zones',
                 component: TimeZones,
                 name: 'admin_time_zones'
+            },
+            {
+                path: 'user/:user_id/edit',
+                component: EditUser,
+                name: 'edit_user'
             }
         ]
     }
