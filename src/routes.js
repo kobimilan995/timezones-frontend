@@ -7,6 +7,9 @@ import Dashboard from './components/admin/Dashboard.vue';
 import TimeZones from './components/admin/TimeZones.vue';
 import EditUser from './components/admin/EditUser.vue';
 import NotFound from './components/NotFound.vue';
+import CreateTimeZone from './components/main/CreateTimeZone.vue';
+import ShowTimeZone from './components/main/ShowTimeZone.vue';
+import UserTimeZones from './components/main/TimeZones.vue';
 
 const routes = [
     {
@@ -17,10 +20,32 @@ const routes = [
     {
         path: '/',
         component: Home,
-        name: 'home',
         meta: {
             requiresAuth: true
-        }
+        },
+
+        children: [
+            {
+                path: '/timezone/create',
+                name: 'timezone_create',
+                component: CreateTimeZone
+            },
+
+            {
+                path: '/timezone/:timezone_id',
+                name: 'timezone_show',
+                component: ShowTimeZone
+            },
+
+            {
+                path: '/',
+                name: 'show_timezones',
+                component: UserTimeZones,
+                meta: {
+                    showAll: false
+                }
+            }
+        ]
     },
     {
         path: '/login',

@@ -37,7 +37,7 @@ export default {
                 this.$store.commit('auth/SET_TOKEN', token);
                 this.$store.commit('auth/SET_USER', response.data.user);
                 axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('auth-token');;
-                this.$router.push({name: 'home'});
+                this.$router.push({name: 'show_timezones'});
                 this.$notify({
                     group: 'notify',
                     title: 'Success',

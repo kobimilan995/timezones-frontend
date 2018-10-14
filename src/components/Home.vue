@@ -1,7 +1,14 @@
 <template>
     <div>
-        <h1>Home</h1>
-        <p>{{gmdate}}</p>
+        <ul class="nav nav-tabs mb-4">
+            <li class="nav-item">
+                <router-link class="nav-link" :class="{'active': route=='show_timezones'}" :to="{ name: 'show_timezones'}">My Time Zones</router-link>
+            </li>
+            <li class="nav-item">
+                <router-link class="nav-link" :class="{'active': route=='timezone_create'}" :to="{ name: 'timezone_create'}">Create new Time Zone</router-link>
+            </li>
+        </ul>
+        <router-view></router-view>
     </div>
 </template>
 
@@ -9,12 +16,12 @@
 export default {
     computed: {
         gmdate() {
-            if(this.$store.state.gmt.gmtHuman) {
-                return this.$store.state.gmt.gmtHuman;
-            } else {
-                return '';
-            }
+            return this.$store.state.gmt.gmtHuman ? this.$store.state.gmt.gmtHuman:'';
+        },
+        route() {
+            return this.$route.name;
         }
+
     },
 
     created() {
