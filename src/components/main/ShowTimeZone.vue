@@ -93,7 +93,18 @@ export default {
                     this.submitLoading = false;
                     this.editing = false;
                 }
+
+                else {
+                    this.$notify({
+                        group: 'notify',
+                        title: 'Error',
+                        text: 'You need to change some field in order to edit time zone.',
+                        type: 'error'
+                    });
+                    this.submitLoading = false;
+                }
             }).catch(error => {
+                console.log(error);
                 if(error.response.status == 403) {
                     this.$notify({
                         group: 'notify',

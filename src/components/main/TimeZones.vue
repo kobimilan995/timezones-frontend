@@ -3,12 +3,15 @@
         <input v-model="search_query" type="text" class="form-control col-md-4 offset-md-4" placeholder="Filter time zones">
         <br>
         <h5 class="col-md-6 offset-md-3" style="text-align:center;">GMT date: {{gmdate}}</h5>
+        <div v-if="!loading && timeZones.length == 0">
+            You don't have any time zones added yet. Go add a new one!
+        </div>
         <div v-if="!loading">
             <br>
             <div class="row">
                 <div class="card col-md-3" v-for="(tz, index) in timeZones">
                     <!-- <user-component @userDeleted="removeUser" :user="user" :key="index" :loop_index="index"></user-component> -->
-                    <TimeZone :timeZone="tz"  :loop_index="index"></TimeZone>
+                    <TimeZone :timeZone="tz"  :loop_index="index" :author="tz.first_name ? tz.first_name + ' ' + tz.last_name : ''"></TimeZone>
                 </div>
             </div>
         </div>
