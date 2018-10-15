@@ -63,7 +63,7 @@ router.beforeEach((to, from, next) => {
         let user = JSON.parse(localStorage.getItem('auth-user'));
         if(user.role_name != 'Admin') {
             next({
-                name: 'home'
+                name: 'show_timezones'
             })
         } else {
             next()

@@ -36,8 +36,9 @@ export default {
                 this.$router.push({name: 'login'});
             } else if(error.response.status == 403){
 
-                this.$router.push({name: 'home'});
+                this.$router.push({name: 'show_timezones'});
             } else if(error.response.status == 404) {
+                console.log('redirecting');
                 this.$router.push({name: 'not_found'});
             }
 

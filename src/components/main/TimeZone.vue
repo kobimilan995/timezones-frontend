@@ -1,8 +1,8 @@
 <template>
     <div class="card-body">
-        <h5 class="card-title">{{timeZone.tz_name}}</h5>
+        <h4><router-link :to="{ name: timeZoneRoute, params: {timezone_id:timeZone.tz_id} }">{{timeZone.tz_name}}</router-link></h4>
         <h6 class="card-subtitle mb-2 text-muted">{{timeZone.tz_city}}</h6>
-        <p>{{this.timeZone.tz_gmt_diff}}</p>
+        <p>GMT: {{this.timeZone.tz_gmt_diff >= 0 ? '+' + this.timeZone.tz_gmt_diff : this.timeZone.tz_gmt_diff}}</p>
         <br>
         <p>{{gmdate}}</p>
         <!-- <p>{{gmdate}}</p> -->
@@ -27,8 +27,15 @@ export default {
         gmdate() {
             let { gmt } = this.$store.state.gmt;
             return moment(gmt).add(this.timeZone.tz_gmt_diff, "hours").format('MMMM Do YYYY, h:mm:ss a');
+        },
+
+        timeZoneRoute() {
+            if(this.$route.name === 'show_timezones') {
+                return 'timezone_show';
+            }
         }
     },
+
 }
 </script>
 
