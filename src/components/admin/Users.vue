@@ -12,19 +12,14 @@
         <div v-else style="align-content: center;">
             <i class="fa fa-spinner fa-spin" style="font-size:48px"></i>
         </div>
-
-        <div class="pagination" style="margin-top: 50px;" v-if="lastPage > 1">
-            <a href="#" @click.prevent="paginateUsers(currentPage - 1)">&laquo;</a>
-            <a href="#" v-for="n in lastPage" :class="{'active': n == currentPage}" @click.prevent="paginateUsers(n)">{{n}}</a>
-            <a href="#" @click.prevent="paginateUsers(currentPage + 1)">&raquo;</a>
-        </div>
+        <pagination class="mt-4" v-model="currentPage" :records="usersCount" :per-page="perPage" @paginate="paginateUsers"></pagination>
     </div>
 
 </template>
 
 <script>
 import User from './User.vue';
-import Paginate from 'vuejs-paginate';
+import Pagination from 'vue-pagination-2';
 export default {
     data() {
         return {
@@ -34,12 +29,12 @@ export default {
             currentPage: 1,
             usersCount: 0,
             lastPage: 0,
-            perPage: 4
+            perPage: 12
         }
     },
     components: {
         'user-component': User,
-        'pagination-component': Paginate
+        Pagination
     },
     created() {
         this.fetchUsers();
@@ -49,7 +44,7 @@ export default {
         fetchUsers() {
             this.loading = true;
             axios.get(window.api_url+'/api/admin/users?query='+this.search_query+'&current_page='+this.currentPage+'&per_page='+this.perPage).then(response => {
-                console.log(response.data);
+                // console.log(response.data);
                 this.usersCount = response.data.count.count;
                 this.lastPage = Math.ceil(this.usersCount / this.perPage);
                 this.users = response.data.users;
@@ -79,6 +74,7 @@ export default {
 
     watch: {
         search_query() {
+            this.currentPage = 1;
             this.fetchUsers();
         }
     }
