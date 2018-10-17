@@ -6,16 +6,18 @@
         <div class="col-md-6 offset-md-3">
             <div class="card" style="width: auto;">
                 <div class="card-body">
-                    <input ref="tz_name" type="text" class="form-control" :value="timeZone.tz_name" v-if="editing">
+                    <span v-if="editing">Time zone name:</span><input ref="tz_name" type="text" class="form-control" :value="timeZone.tz_name" v-if="editing">
                     <h5 class="card-title" v-else>{{timeZone.tz_name}}</h5>
                     <p class="card-text" v-if="!editing"><small>{{gmdate}}</small></p>
                 </div>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">
+                        <span v-if="editing">Time zone city:</span>
                         <input ref="tz_city" type="text" class="form-control" :value="timeZone.tz_city" v-if="editing">
                         <span v-else>City: {{timeZone.tz_city}}</span>
                     </li>
                     <li class="list-group-item">
+                        <span v-if="editing">Time zone GMT differance:</span>
                         <input ref="tz_gmt_diff" type="number" class="form-control" :value="timeZone.tz_gmt_diff" v-if="editing">
                         <span v-else>GMT: {{this.timeZone.tz_gmt_diff >= 0 ? '+' + this.timeZone.tz_gmt_diff : this.timeZone.tz_gmt_diff}}</span>
                     </li>
