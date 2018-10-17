@@ -22,7 +22,7 @@
                 <label for="password_confirmation">Password Confirmation</label>
                 <input type="password" class="form-control" v-model="user.password_confirmation" id="password_confirmation" placeholder="Password confirmation" required>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary" :disabled="submitDisabled">Submit <i class="fa fa-spinner fa-spin" v-show="submitDisabled"></i></button>
 
             <small id="emailHelp" class="form-text text-muted"><router-link to="/login">Already have an account?</router-link></small>
         </form>
@@ -39,12 +39,15 @@ export default {
                 email: '',
                 password: '',
                 password_confirmation: ''
-            }
+            },
+
+            submitDisabled: false
         }
     },
 
     methods: {
         submitRegisterRequest() {
+            this.submitDisabled = true;
             axios.post(window.api_url+'/api/register', this.user).then(response => {
                 let {data} = response;
                 this.$notify({
@@ -54,6 +57,7 @@ export default {
                     type: 'success'
                 });
                 this.$router.push({name: 'login'});
+                this.submitDisabled = false;
             }).catch(error => {
                 if(error.response.status == 400) {
                     let {data} = error.response.data;
@@ -64,6 +68,7 @@ export default {
                         type: 'error'
                     });
                 }
+                this.submitDisabled = false;
             });
         }
     }

@@ -10,7 +10,8 @@
                 <label for="password">Password</label>
                 <input type="password" class="form-control" id="password" v-model="credentials.password" placeholder="Password" required>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary" :disabled="submitDisabled">Submit <i class="fa fa-spinner fa-spin" v-show="submitDisabled"></i></button>
+            <small id="emailHelp" class="form-text text-muted"><router-link to="/register">Don't have an account?</router-link></small>
         </form>
     </div>
 </template>
@@ -22,20 +23,22 @@ export default {
             credentials: {
                 email: '',
                 password: ''
-            }
+            },
+            submitDisabled: false
         }
     },
 
     methods: {
         submitLoginRequest() {
+            this.submitDisabled = true;
             axios.post(window.api_url+'/api/login', this.credentials).then(response => {
                 let token = response.data.token;
                 // console.log(response);
-                let user = response.data.user;
+                let {user} = response.data;
                 localStorage.setItem('auth-token', token);
                 localStorage.setItem('auth-user', JSON.stringify(user));
                 this.$store.commit('auth/SET_TOKEN', token);
-                this.$store.commit('auth/SET_USER', response.data.user);
+                this.$store.commit('auth/SET_USER', user);
                 axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('auth-token');;
                 this.$router.push({name: 'show_timezones'});
                 this.$notify({
@@ -44,6 +47,7 @@ export default {
                     text: response.data.message,
                     type: 'success'
                 });
+                this.submitDisabled = false;
             }).catch(error => {
                 // console.log(error);
                 if(error.response.status) {
@@ -55,6 +59,7 @@ export default {
                         type: 'error'
                     });
                 }
+                this.submitDisabled = false;
             });
         }
     },

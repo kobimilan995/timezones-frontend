@@ -50,7 +50,7 @@ export default {
                 this.users = response.data.users;
                 this.loading = false;
             }).catch(error => {
-                console.log(error);
+                // console.log(error);
             });
         },
 

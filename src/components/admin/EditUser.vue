@@ -76,6 +76,7 @@ export default {
             this.newUser.last_name = this.$refs['last_name'].value;
             this.newUser.email = this.$refs['email'].value;
             this.newUser.id = this.user.id;
+            this.user = this.newUser;
             axios.put(window.api_url+'/api/admin/users/'+this.user.id, this.newUser).then(response => {
                 // console.log(response.data);
                 if(response.data.updated) {
@@ -112,6 +113,8 @@ export default {
             this.$dialog
             .confirm('You are about to ban ' + this.user.first_name + ' ' + this.user.last_name+'. Are you sure?')
             .then((dialog) => {
+
+                this.disableSubmitting = true;
                 axios.delete(window.api_url+'/api/admin/users/'+this.user.id).then(response => {
                     this.$notify({
                         group: 'notify',
@@ -120,6 +123,7 @@ export default {
                         type: 'success'
                     });
                     this.$router.push({name: 'admin_users'});
+                    this.disableSubmitting = false;
                 }).catch(error => {
                     let {data} = error.response.data;
                     this.$notify({
@@ -128,6 +132,7 @@ export default {
                         text: data[Object.keys(data)[0]][0],
                         type: 'error'
                     });
+                    this.disableSubmitting = false;
                 });
             });
 

@@ -12,11 +12,7 @@ import ShowTimeZone from './components/main/ShowTimeZone.vue';
 import UserTimeZones from './components/main/TimeZones.vue';
 
 const routes = [
-    {
-        path: '/resource/not_found',
-        component: NotFound,
-        name: 'not_found'
-    },
+
     {
         path: '/',
         component: Home,
@@ -92,7 +88,13 @@ const routes = [
                 name: 'admin_show_user'
             }
         ]
-    }
+    },
+
+    {
+        path: '*',
+        component: NotFound,
+        name: 'not_found'
+    },
 ]
 
 export default routes;

@@ -11,6 +11,10 @@ export default {
 
         SET_USER(state, user) {
             state.user = user;
+        },
+
+        CHANGE_USERS_ROLE(state, role) {
+            state.user.role_name = role;
         }
     },
     actions: {

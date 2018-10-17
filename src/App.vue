@@ -35,7 +35,8 @@ export default {
                 axios.defaults.headers.common['Authorization'] = 'Bearer ';
                 this.$router.push({name: 'login'});
             } else if(error.response.status == 403){
-
+                this.$store.commit('auth/CHANGE_USERS_ROLE', 'User');
+                localStorage.setItem('auth-user', JSON.stringify(this.$store.state.auth.user));
                 this.$router.push({name: 'show_timezones'});
             } else if(error.response.status == 404) {
                 // console.log('redirecting');
