@@ -87,9 +87,9 @@ const routes = [
                 name: 'admin_time_zones'
             },
             {
-                path: 'user/:user_id/edit',
+                path: 'user/:user_id',
                 component: EditUser,
-                name: 'edit_user'
+                name: 'admin_show_user'
             }
         ]
     }

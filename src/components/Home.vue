@@ -2,7 +2,7 @@
     <div>
         <ul class="nav nav-tabs mb-4">
             <li class="nav-item">
-                <router-link class="nav-link" :class="{'active': route=='show_timezones' || route=='timezone_show'}" :to="{ name: 'show_timezones'}">My Time Zones</router-link>
+                <router-link class="nav-link" :class="{'active': route=='show_timezones' || route=='timezone_show'}" :to="{ name: 'show_timezones'}">Time Zones</router-link>
             </li>
             <li class="nav-item">
                 <router-link class="nav-link" :class="{'active': route=='timezone_create'}" :to="{ name: 'timezone_create'}">Create new Time Zone</router-link>

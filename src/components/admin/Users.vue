@@ -5,7 +5,7 @@
             <br>
             <div class="row">
                 <div class="card col-md-3" v-for="(user, index) in users">
-                    <user-component @userDeleted="removeUser" :user="user" :key="index" :loop_index="index"></user-component>
+                    <user-component :user="user" :key="index" :loop_index="index"></user-component>
                 </div>
             </div>
         </div>
@@ -65,10 +65,6 @@ export default {
             }
             this.currentPage = page;
             this.fetchUsers();
-        },
-
-        removeUser(payload) {
-            this.users.splice(payload, 1);
         }
     },
 

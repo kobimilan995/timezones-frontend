@@ -3,28 +3,40 @@
         <i class="fa fa-spinner fa-spin" style="font-size:48px"></i>
     </div>
     <div v-else>
-        <h4 class="col-md-4 offset-md-3">Edit user</h4>
-        <form class=" col-md-6 offset-md-3" @submit.prevent="submitRegisterRequest">
+        <hr>
+        <div class=" col-md-6 offset-md-3">
+            <router-link class="btn btn-primary float-right" :to="{ name: 'admin_users'}">All users</router-link>
             <div class="form-group">
-                <label for="first_name">First Name</label>
-                <input type="first_name" class="form-control" id="first_name" v-model="user.first_name" aria-describedby="first_name" placeholder="First name" required>
+                <label for="first_name">First Name:</label>
+                <h5 v-if="!editing">{{user.first_name}}</h5>
+                <input ref="first_name" v-else type="first_name" class="form-control" id="first_name" :value="user.first_name" aria-describedby="first_name" placeholder="First name" required>
             </div>
+            <hr>
             <div class="form-group">
-                <label for="last_name">Last Name</label>
-                <input type="last_name" class="form-control" id="last_name" v-model="user.last_name" aria-describedby="last_name" placeholder="Last name" required>
+                <label for="last_name">Last name:</label>
+                <h5 v-if="!editing">{{user.last_name}}</h5>
+                <input ref="last_name" v-else type="last_name" class="form-control" id="last_name" :value="user.last_name" aria-describedby="last_name" placeholder="Last name" required>
             </div>
+            <hr>
             <div class="form-group">
-                <label for="exampleInputEmail1">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" v-model="user.email" aria-describedby="emailHelp" placeholder="Enter email" required>
+                <label for="exampleInputEmail1">Email address:</label>
+
+                <h5 v-if="!editing">{{user.email}}</h5>
+                <input ref="email" v-else type="email" class="form-control" id="exampleInputEmail1" :value="user.email" aria-describedby="emailHelp" placeholder="Enter email" required>
             </div>
+            <hr>
             <div class="form-group">
-                <label for="sel1">Select list:</label>
-                <select ref="new_user_role" class="form-control" id="sel1">
+                <label for="sel1">Users role:</label>
+                <h5 v-if="!editing">{{user.role_name}}</h5>
+                <select v-else ref="new_user_role" class="form-control" id="sel1">
                     <option v-for="(role, index) in roles" :value="role.role_id" :selected="user.role_id == role.role_id ? true : false">{{role.role_name}}</option>
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary" :disabled="disableSubmitting">Submit</button>
-        </form>
+            <button class="btn btn-info" v-if="!editing" @click="editing = true">Edit</button>
+            <button class="btn btn-danger float-right" v-if="!editing" :disabled="disableSubmitting" @click="deleteUser">Delete</button>
+            <button type="submit" class="btn btn-primary" :disabled="disableSubmitting" v-if="editing" @click="submitUpdateRequest">Save changes</button>
+            <button type="submit" class="btn btn-info float-right" v-if="editing" @click="editing = false">Cancel</button>
+        </div>
     </div>
 </template>
 
@@ -40,7 +52,14 @@ export default {
                 role_id: ''
 
             },
-
+            newUser: {
+                id: 0,
+                first_name: '',
+                last_name: '',
+                email: '',
+                role_id: ''
+            },
+            editing: false,
             roles: [],
 
             loading: true,
@@ -49,12 +68,16 @@ export default {
     },
 
     methods: {
-        submitRegisterRequest() {
+        submitUpdateRequest() {
             this.disableSubmitting = true;
             let select = this.$refs['new_user_role'];
-            this.user.role_id = select.options[select.selectedIndex].value;
-            axios.put(window.api_url+'/api/admin/users/'+this.user.id, this.user).then(response => {
-                console.log(response.data);
+            this.newUser.role_id = select.options[select.selectedIndex].value;
+            this.newUser.first_name = this.$refs['first_name'].value;
+            this.newUser.last_name = this.$refs['last_name'].value;
+            this.newUser.email = this.$refs['email'].value;
+            this.newUser.id = this.user.id;
+            axios.put(window.api_url+'/api/admin/users/'+this.user.id, this.newUser).then(response => {
+                // console.log(response.data);
                 if(response.data.updated) {
                     this.$notify({
                         group: 'notify',
@@ -83,17 +106,42 @@ export default {
 
                 this.disableSubmitting = false;
             });
+        },
+
+        deleteUser() {
+            this.$dialog
+            .confirm('You are about to ban ' + this.user.first_name + ' ' + this.user.last_name+'. Are you sure?')
+            .then((dialog) => {
+                axios.delete(window.api_url+'/api/admin/users/'+this.user.id).then(response => {
+                    this.$notify({
+                        group: 'notify',
+                        title: 'Success',
+                        text: response.data.message,
+                        type: 'success'
+                    });
+                    this.$router.push({name: 'admin_users'});
+                }).catch(error => {
+                    let {data} = error.response.data;
+                    this.$notify({
+                        group: 'notify',
+                        title: 'Error',
+                        text: data[Object.keys(data)[0]][0],
+                        type: 'error'
+                    });
+                });
+            });
+
         }
     },
 
     created() {
         axios.get(window.api_url+'/api/admin/users/'+this.$route.params.user_id).then(response => {
-            console.log(response.data);
+            // console.log(response.data);
             this.user = response.data.user;
             this.roles = response.data.roles;
             this.loading = false;
         }).catch(error => {
-            console.log(error);
+            // console.log(error);
         });
     }
 }

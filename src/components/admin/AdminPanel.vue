@@ -5,7 +5,7 @@
                 <router-link class="nav-link" :class="{'active': route=='admin_dashboard'}" :to="{ name: 'admin_dashboard'}">Dashboard</router-link>
             </li>
             <li class="nav-item">
-                <router-link class="nav-link" :class="{'active': route=='admin_users' || route == 'edit_user'}" :to="{ name: 'admin_users'}">Users</router-link>
+                <router-link class="nav-link" :class="{'active': route=='admin_users' || route == 'show_user'}" :to="{ name: 'admin_users'}">Users</router-link>
             </li>
         </ul>
         <br>

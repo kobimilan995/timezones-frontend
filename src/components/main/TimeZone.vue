@@ -5,7 +5,8 @@
         <p>GMT: {{this.timeZone.tz_gmt_diff >= 0 ? '+' + this.timeZone.tz_gmt_diff : this.timeZone.tz_gmt_diff}}</p>
         <br>
         <p>{{gmdate}}</p>
-        <p v-if="author">Author: {{author}}</p>
+        <p v-if="author">Author: <router-link :to="{ name: 'admin_show_user', params: {user_id:this.timeZone.tz_user_id} }">{{author}}</router-link></p>
+
         <!-- <p>{{gmdate}}</p> -->
         <!-- <router-link class="btn btn-primary btn-sm mr-2" :to="{ name: 'edit_user', params: { user_id: user.id }}">Edit</router-link>
         <a class="btn btn-danger btn-sm" style="color: white;" @click="deleteUser">Ban <i class="fas fa-times"></i></a> -->
