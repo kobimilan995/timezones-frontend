@@ -51,11 +51,11 @@ export default {
     },
     created() {
         axios.get(window.api_url+'/api/time_zones/'+this.$route.params.timezone_id).then(response => {
-            console.log(response.data);
+            // console.log(response.data);
             this.timeZone = response.data.time_zone;
             this.loading = false;
         }).catch(error => {
-            console.log(error);
+            // console.log(error);
             if(error.response.status == 403 || error.response.data == 400) {
                 this.$notify({
                     group: 'notify',
@@ -75,7 +75,7 @@ export default {
             this.newTimeZone.name = this.$refs['tz_name'].value;
             this.newTimeZone.gmt_differance = this.$refs['tz_gmt_diff'].value;
             axios.put(window.api_url+'/api/time_zones/'+this.$route.params.timezone_id, this.newTimeZone).then(response => {
-                console.log(response.data);
+                // console.log(response.data);
                 let { completed } = response.data;
 
                 if(completed) {
@@ -104,7 +104,7 @@ export default {
                     this.submitLoading = false;
                 }
             }).catch(error => {
-                console.log(error);
+                // console.log(error);
                 if(error.response.status == 403) {
                     this.$notify({
                         group: 'notify',
@@ -134,7 +134,7 @@ export default {
 
                 this.submitLoading = true;
                 axios.delete(window.api_url+'/api/time_zones/'+this.$route.params.timezone_id).then(response => {
-                    console.log(response.data);
+                    // console.log(response.data);
                     this.$notify({
                         group: 'notify',
                         title: 'Success',

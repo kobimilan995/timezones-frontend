@@ -22,14 +22,6 @@ export default {
             return this.$route.name;
         }
 
-    },
-
-    created() {
-        axios.get(window.api_url+'/api/test').then(response => {
-            console.log(response);
-        }).catch(error => {
-            console.log(error);
-        });
     }
 }
 </script>

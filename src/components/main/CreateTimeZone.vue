@@ -38,7 +38,7 @@ export default {
             this.loading = true;
             this.timezone.gmt_differance = this.gmt_diff;
             axios.post(window.api_url + '/api/time_zones', this.timezone).then(response => {
-                console.log(response.data);
+                // console.log(response.data);
                 let { completed } = response.data;
                 if(completed) {
                     this.$notify({
@@ -51,7 +51,7 @@ export default {
                 }
                 this.loading = false;
             }).catch(error => {
-                console.log(error);
+                // console.log(error);
                 let {data} = error.response.data;
                 this.$notify({
                     group: 'notify',

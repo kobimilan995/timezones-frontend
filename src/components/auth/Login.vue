@@ -30,7 +30,7 @@ export default {
         submitLoginRequest() {
             axios.post(window.api_url+'/api/login', this.credentials).then(response => {
                 let token = response.data.token;
-                console.log(response);
+                // console.log(response);
                 let user = response.data.user;
                 localStorage.setItem('auth-token', token);
                 localStorage.setItem('auth-user', JSON.stringify(user));
@@ -45,7 +45,7 @@ export default {
                     type: 'success'
                 });
             }).catch(error => {
-                console.log(error);
+                // console.log(error);
                 if(error.response.status) {
                     let {data} = error.response.data;
                     this.$notify({

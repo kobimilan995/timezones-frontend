@@ -38,7 +38,7 @@ export default {
 
                 this.$router.push({name: 'show_timezones'});
             } else if(error.response.status == 404) {
-                console.log('redirecting');
+                // console.log('redirecting');
                 this.$router.push({name: 'not_found'});
             }
 
@@ -56,7 +56,7 @@ export default {
 
             setInterval(intervalFunction, 1000);
         }).catch(error => {
-            console.log(error);
+            // console.log(error);
         });
     },
 
