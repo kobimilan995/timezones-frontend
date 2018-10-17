@@ -56,6 +56,7 @@ export default {
 
     methods: {
         fetchTimeZones() {
+            console.log(axios.defaults.headers.common['Authorization']);
             this.loading = true;
             axios.get(window.api_url + '/api/time_zones?search_query='+this.search_query+'&current_page='+this.currentPage+'&per_page='+this.perPage).then(response => {
                 // console.log(response.data);
