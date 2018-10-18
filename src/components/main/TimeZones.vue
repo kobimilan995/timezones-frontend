@@ -93,3 +93,14 @@ export default {
 
 }
 </script>
+
+<style>
+.VuePagination__pagination-item-prev-chunk.disabled {
+    display: none;
+}
+
+.VuePagination__pagination-item-next-chunk.disabled {
+    display: none;
+}
+
+</style>
