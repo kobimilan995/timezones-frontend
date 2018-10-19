@@ -50,7 +50,12 @@ export default {
                 this.users = response.data.users;
                 this.loading = false;
             }).catch(error => {
-                // console.log(error);
+                this.$notify({
+                    group: 'notify',
+                    title: 'Error',
+                    text: error.message,
+                    type: 'error'
+                });
             });
         },
 

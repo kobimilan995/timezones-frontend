@@ -16,11 +16,6 @@
 
 <script>
 export default {
-    created() {
-
-
-    },
-
     computed: {
         route() {
             return this.$route.name;

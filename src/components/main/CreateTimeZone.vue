@@ -36,7 +36,7 @@ export default {
     methods: {
         createTimeZone() {
             this.loading = true;
-            this.timezone.gmt_differance = this.gmt_diff;
+            this.timezone.gmt_differance = parseInt(this.gmt_diff);
             axios.post(window.api_url + '/api/time_zones', this.timezone).then(response => {
                 // console.log(response.data);
                 let { completed } = response.data;

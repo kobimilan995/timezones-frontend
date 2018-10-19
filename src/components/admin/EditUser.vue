@@ -146,7 +146,12 @@ export default {
             this.roles = response.data.roles;
             this.loading = false;
         }).catch(error => {
-            // console.log(error);
+            this.$notify({
+                group: 'notify',
+                title: 'Error',
+                text: error.message,
+                type: 'error'
+            });
         });
     }
 }

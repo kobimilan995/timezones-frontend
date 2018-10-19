@@ -17,10 +17,6 @@ export default {
         loop_index: {
             required: true
         }
-    },
-
-    methods: {
-
     }
 }
 </script>

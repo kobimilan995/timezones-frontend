@@ -75,11 +75,11 @@ export default {
             this.submitLoading = true;
             this.newTimeZone.city = this.$refs['tz_city'].value;
             this.newTimeZone.name = this.$refs['tz_name'].value;
-            this.newTimeZone.gmt_differance = this.$refs['tz_gmt_diff'].value;
+            this.newTimeZone.gmt_differance = parseInt(this.$refs['tz_gmt_diff'].value);
+            // console.log(this.newTimeZone);
             axios.put(window.api_url+'/api/time_zones/'+this.$route.params.timezone_id, this.newTimeZone).then(response => {
                 // console.log(response.data);
                 let { completed } = response.data;
-
                 if(completed) {
                     this.$notify({
                         group: 'notify',
